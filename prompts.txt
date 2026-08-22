@@ -1,0 +1,22 @@
+Playwright Agents: playwright.dev/docs/test-agents 
+https://www.udemy.com/course/playwright-tutorials-automation-testing/learn/lecture/53018337#overview
+
+1. Create test plan prompt:
+Explore the app and create test plan for https://rahulshettyacademy.com/seleniumPractise/#/
+
+2. Create playwright automation tests based on the test plan abow
+Add tests for ### 2. Product Search Functionality 
+https://www.udemy.com/course/playwright-tutorials-automation-testing/learn/lecture/53018351#overview
+
+Test plan: specs\greenkart.plan.md
+
+3. На основании созданного тестового плана создай, пожалуйста, в папке Test Cases в корне проекта 2 
+типа документов в формате .md:
+3.1. Сам тестовый план (папка Test Cases в корне проекта)
+3.2. Тест кейс для каждого из тестов (папка Test Cases в корне проекта)
+Формат каждого из тест кейсов: Название вверху страницы и далее таблица состоящая из 4 столбцов: 
+Номер шага теста, Описание шага, Ожидаемый результат выполнения, Фактический результат выполнения.
+
+4. На основании созданного тестового плана создай, пожалуйста, автотесты Playwright 
+и выполни их. В случае падения теста, постарайся починить его с помощью агента healer
+
