@@ -1,0 +1,45 @@
+name: Playwright tests
+
+# The suite drives the live demo shop at rahulshettyacademy.com, so a red run can also mean the
+# third-party site is slow or unavailable rather than a regression. Playwright retries twice and
+# runs a single worker on CI (see playwright.config.ts).
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Run the Playwright suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install the Chromium browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the tests
+        run: npm test
+
+      - name: Upload the HTML report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

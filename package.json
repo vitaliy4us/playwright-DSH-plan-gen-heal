@@ -1,9 +1,15 @@
 {
   "name": "playwright-dsh-plan-gen-heal",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright end-to-end tests for the GreenKart demo shop, produced with the Playwright Test Agents workflow (planner → generator → healer).",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "trace": "playwright show-trace"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
