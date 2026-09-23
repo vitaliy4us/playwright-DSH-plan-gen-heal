@@ -11,6 +11,7 @@ test.describe('Cart Edge Cases', () => {
   // is persisted and restored correctly, so this is a narrow but real data-loss window:
   // reloading the page within ~1 s of adding a product loses the cart.
   // Marked test.fixme instead of weakening the assertion or adding an arbitrary sleep.
+  // Defect report: Bug Reports/BUG-1-cart-is-lost-on-immediate-reload.md
   test.fixme('should-persist-cart-after-app-reload', async ({ page }) => {
     const brocolliCard = page.locator('.product').filter({ hasText: 'Brocolli - 1 Kg' });
     const headerValue = (label: string) =>

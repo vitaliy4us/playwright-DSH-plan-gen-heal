@@ -15,6 +15,17 @@ Observed behaviour of the application (verified during planning):
 
 Points worth noting while testing: the rupee sign is rendered through CSS (::before) and is not part of the element text, so assertions should use the numeric parts or the .quantity/.amount classes; console errors from favicon.ico (ERR_TOO_MANY_REDIRECTS) are unrelated site noise.
 
+### Expected behaviour vs observed behaviour (known deviations)
+
+Part of this plan describes what the application *actually does*. Where that contradicts what a user would expect, the deviation is recorded as a defect below, and the affected scenarios state the expectation explicitly so the gap stays visible instead of hiding behind a green test.
+
+| # | Expectation | Observed | Defect report |
+|---|---|---|---|
+| 1 | A cart survives a page reload | The cart is lost when the page is reloaded within ~1 s of a change: the application flushes the cart to localStorage about 1 s after a change, and its startup overwrites the stored state with `"null"` | `Bug Reports/BUG-1-cart-is-lost-on-immediate-reload.md` |
+| 2 | An empty cart cannot be ordered | Every step of the checkout flow is allowed with an empty cart, and the application returns to the shop as if an order had been placed | `Bug Reports/BUG-2-empty-cart-can-be-ordered.md` |
+
+Scenarios 1.5 and 1.6 document the *observed* behaviour (they stay green on purpose, so a change in the application is caught). Scenario 1.7 states the *expectation* for an empty cart and is marked `test.fixme()` until the defect is resolved.
+
 ## Test Scenarios
 
 ### 1. Cart Edge Cases
@@ -102,6 +113,8 @@ Points worth noting while testing: the rupee sign is rendered through CSS (::bef
     - expect: "Discount : 0%" is shown
     - expect: "Total After Discount : 0" is shown
 
+  > **Note:** this scenario documents the *observed* rendering of the cart page with an empty cart. It deliberately does not assert that ordering is blocked — that expectation is covered by scenario 1.7 (see `Bug Reports/BUG-2-empty-cart-can-be-ordered.md`).
+
 #### 1.6. should-allow-completing-an-order-with-an-empty-cart
 
 **File:** `tests/cart-edge-cases/should-allow-completing-an-order-with-an-empty-cart.spec.ts`
@@ -114,3 +127,22 @@ Points worth noting while testing: the rupee sign is rendered through CSS (::bef
   3. Check the Terms & Conditions checkbox and click "Proceed"
     - expect: the application returns to the shop (the URL ends with "#/")
     - expect: no error message is shown to the user
+
+  > **Note:** this scenario documents the *observed* behaviour, which contradicts the expectation stated in 1.7. It stays green on purpose: if the application starts blocking empty-cart checkout, this test will fail and point at the behaviour change.
+
+#### 1.7. should-not-offer-order-placement-when-the-cart-is-empty
+
+**File:** `tests/cart-edge-cases/should-not-offer-order-placement-when-the-cart-is-empty.spec.ts`
+
+**Expected behaviour (tester's expectation, pending a product decision — see `Bug Reports/BUG-2-empty-cart-can-be-ordered.md`):** with an empty cart the application must not let the user place an order; the "Place Order" action must be unavailable on the cart page.
+
+**Steps:**
+  1. Click the "Cart" link in the header to open the cart drawer with an empty cart
+    - expect: the drawer shows "You cart is empty!"
+  2. Click "PROCEED TO CHECKOUT" in the drawer
+    - expect: the URL ends with "#/cart"
+  3. Inspect the "Place Order" action on the cart page
+    - expect: "Place Order" is disabled (or absent) — an empty cart must not be orderable
+    - expect: no order can be completed with an empty cart
+
+**Status:** red by design. The test is marked `test.fixme()`: today "Place Order" is enabled and starts the order flow (see scenario 1.6).

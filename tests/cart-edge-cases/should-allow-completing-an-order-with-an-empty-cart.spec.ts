@@ -3,6 +3,10 @@
 import { test, expect } from '../fixtures';
 
 test.describe('Cart Edge Cases', () => {
+  // Documents the OBSERVED behaviour: the application allows every step of the checkout flow with
+  // an empty cart. This contradicts the expectation asserted in
+  // should-not-offer-order-placement-when-the-cart-is-empty.spec.ts.
+  // Defect report: Bug Reports/BUG-2-empty-cart-can-be-ordered.md
   test('should-allow-completing-an-order-with-an-empty-cart', async ({ page }) => {
     // 1. Open the cart drawer with an empty cart and proceed to checkout
     await page.getByRole('link', { name: 'Cart' }).click();
