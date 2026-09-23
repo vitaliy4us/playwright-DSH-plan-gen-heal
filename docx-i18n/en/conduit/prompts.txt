@@ -1,0 +1,50 @@
+MCP usage example. Artem Bondar https://youtu.be/FGwtDhjnBMc?si=odqzr5kzZbpHYTZA
+
+Test Case 1: Create a new article
+1. Navigate to https://conduit.bondaracademy.com/
+2. In the top of the corner click "Sign In" button. Login page should be opened
+3. Enter email: "pwtest@test.com, enter password "Welcome2" and click Sign in button.
+   User should be redirected to the home page. User should be logged in and usename
+   should be displayed in the top right corner.
+4. Click "New Article link menu item. The editor page should be displayed
+5. Type fill out the form with a random article title, article description and article body. Click 
+   Publish Article button. The article details page should be opened with details of created
+   article. The "Edit Article" and "Delete Article" buttons should be visible to the right of the
+   username. The comments block should be visible below the article
+6. Click on "Home" link menu item. User should be redirected to the home page and the
+   "Global Feed" tab should be active. Validate that first article in the list of the articles is the
+   article created on the step 5
+7. Click on this newly created article. Verify that article details page is opened.
+8. Delete the article
+
+Prompt:
+We are working in the project C:\Users\vital\AI\playwright-DSH1. First confirm your working
+folder, then create the test.
+Use Playwright MCP server and automate provided test case. You need to 
+navigate to the application in the browser, perform all steps of the test case and 
+create a new spec file in the test folder with this automated test:
+
+******* CLI example *******:
+
+Create an automated Playwright test for the test case below using the playwright-cli
+skill. Do not use MCP browser tools.
+Project: C:\Users\vital\AI\playwright-DSH1. Save to tests/create-new-article-cli.spec.ts.
+Do not overwrite tests/create-new-article.spec.ts — it is a reference created with MCP.
+Follow the skill's generation workflow, then run the new test and report the result.
+
+Test Case 1: Create a new article
+1. Navigate to https://conduit.bondaracademy.com/
+2. In the top of the corner click "Sign In" button. Login page should be opened
+3. Enter email: "pwtest@test.com", enter password "Welcome2" and click Sign in button.
+   User should be redirected to the home page. User should be logged in and username
+   should be displayed in the top right corner.
+4. Click "New Article" link menu item. The editor page should be displayed
+5. Type fill out the form with a random article title, article description and article body.
+   Click Publish Article button. The article details page should be opened with details of the
+   created article. The "Edit Article" and "Delete Article" buttons should be visible to the
+   right of the username. The comments block should be visible below the article
+6. Click on "Home" link menu item. User should be redirected to the home page and the
+   "Global Feed" tab should be active. Validate that the first article in the list of articles
+   is the article created on the step 5
+7. Click on this newly created article. Verify that the article details page is opened.
+8. Delete the article
