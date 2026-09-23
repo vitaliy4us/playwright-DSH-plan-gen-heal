@@ -13,3 +13,6 @@ node_modules/
 
 # Scratch artifacts (one-off experiment outputs)
 /tiktokenizer-ru.png
+
+# Built documents (the ready files are delivered to C:\Users\vital\AI)
+/Playwright-Test-Agents-Documentation*.docx
